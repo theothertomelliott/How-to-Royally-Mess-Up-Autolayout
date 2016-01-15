@@ -80,10 +80,40 @@
 				</section>
 
 				<section>
-					<h2>Autolayout</h2>
+					<h2>Programmatic Autolayout</h2>
 					<p>
-					TODO: Add an outline of autlayout. Visual Format Language. Solving Equations.
+					Constraints
 					</p>
+
+					<pre><code class="objc" data-trim contenteditable>
+[view addConstraint:[NSLayoutConstraint 
+    constraintWithItem:child1 
+             attribute:NSLayoutAttributeCenterY 
+             relatedBy:NSLayoutRelationEqual 
+                toItem:child2 
+             attribute:NSLayoutAttributeCenterY 
+            multiplier:1.0
+              constant:0.0]
+];
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Programmatic Autolayout</h2>
+					<p>
+					Visual Format Language
+					</p>
+
+					<pre><code class="objc" data-trim contenteditable>
+[view addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:@"V:|-[child1]-(20)-[child2]-|"
+                        options:kNilOptions
+                        metrics:@{}
+                         views:views
+    ]
+];
+					</code></pre>
 				</section>
 
 				<section>
@@ -116,7 +146,7 @@
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
 					<p>Forget to set up your views for autolayout</p>
-					<pre><code class="hljs" data-trim contenteditable>
+					<pre><code class="objc" data-trim contenteditable>
 					subview.translatesAutoresizingMaskIntoConstraints = NO;
 					</code></pre>
 					<p>Add too many constraints</p>
