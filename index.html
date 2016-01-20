@@ -48,16 +48,17 @@
 					</p>
 				</section>
 
-				<!-- Example of nested vertical slides -->
+				<!-- Not sure if this section is needed
 				<section>
 					<h2>About Me</h2>
 					<p>Engineer @ Yext</p>
 					<p>Some more information...</p>
 				</section>
+				-->
 
 				<section>
-					<h2>Yext</h2>
-					<p>Some information...</p>
+					<img src="img/yext-logo.png" style="background:white; border:none; box-shadow:none;"/>
+					<p>#1 in Digital Location Management</p>
 				</section>
 
 				<section>
@@ -146,19 +147,28 @@
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
 					<p>Forget to set up your views for autolayout</p>
+					<p>By default, all views are configured for autoresizing</p>
+					<h3>Simple Fix</h3>
 					<pre><code class="objc" data-trim contenteditable>
 					subview.translatesAutoresizingMaskIntoConstraints = NO;
 					</code></pre>
-					<p>Add too many constraints</p>
-					<p>Don't prepare for zero height or width</p>
-					<p>Use fixed height or width along with hugging edges</p>
 				</section>
 
 				<section>
-					<h2>How Not to Create Unsatisfiable Constraints</h2>
+					<h2>How to Create Unsatisfiable Constraints</h2>
+					<p>Add too many constraints</p>
+					<p>Remove constraints at runtime</p>
+					<h3>Simple Fix</h3>
+					<p>Limit where and how you add constraints. Create everything up front.</p>
+					<p>Change constants, rather than replacing constraints</p>
+				</section>
+				
+				<section>
+					<h2>How to Create Unsatisfiable Constraints</h2>
+					<p>Use fixed height or width</p>
+					<h3>Simple Fix</h3>
 					<p>Use priorities</p>
 					<p>Use >=, <=, <, > rather than ==</p>
-					<p>Limit where and how you add constraints. Create everything up front.</p>
 				</section>
 
 				<section>
@@ -178,6 +188,7 @@
 				<section>
 					<h2>How to Create Inflexible Layout</h2>
 					* Only code to a single view size
+					<h3>Simple Fix</h3>
 				</section>
 
 				<section>
