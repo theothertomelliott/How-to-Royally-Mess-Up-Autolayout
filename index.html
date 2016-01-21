@@ -123,11 +123,13 @@
 					<li class="fragment">Unsatisfiable Constraints</li>
 					<li class="fragment">Ambiguous Layout</li>
 					<li class="fragment">Inflexible Layout</li>
+					<li class="fragment">Crashes</li>
 					</ol>
 				</section>
 
 				<section>
 					<h2>Unsatisfiable Constraints</h2>
+					<div style="background: #000000">
 					<pre>  Unable to simultaneously satisfy constraints.
     
   Probably at least one of the constraints in the following list is one you don't want. 
@@ -142,13 +144,20 @@
     "&lt;NSLayoutConstraint:0x7fe709438470 'UIView-Encapsulated-Layout-Width' H:[UIView:0x7fe709434f40(414)]&gt;"
   )
 					</pre>
+					</div>
 				</section>
-
+				
+				<section>
+					<h2>Unsatisfiable Constraints</h2>
+					<p>Simplified</p>
+					<img class="fragment" src="img/donaldduck-rage.gif"/>
+				</section>
+				
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
-					<p>Forget to set up your views for autolayout</p>
+					<p>Don't set up your views for autolayout</p>
 					<p>By default, all views are configured for autoresizing</p>
-					<h3>Simple Fix</h3>
+					<h3>Get satisfaction</h3>
 					<pre><code class="objc" data-trim contenteditable>
 					subview.translatesAutoresizingMaskIntoConstraints = NO;
 					</code></pre>
@@ -156,19 +165,33 @@
 
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
-					<p>Add too many constraints</p>
-					<p>Remove constraints at runtime</p>
-					<h3>Simple Fix</h3>
-					<p>Limit where and how you add constraints. Create everything up front.</p>
-					<p>Change constants, rather than replacing constraints</p>
+					<pre><code class="objc" data-trim contenteditable>
+  @"H:|[child1(==100)]-(20)-[child2(==100)]|"
+					</code></pre>
+					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px. Big errors on larger and smaller.</p>
 				</section>
-				
+
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
-					<p>Use fixed height or width</p>
-					<h3>Simple Fix</h3>
-					<p>Use priorities</p>
-					<p>Use >=, <=, <, > rather than ==</p>
+					<pre><code class="objc" data-trim contenteditable>
+  @"H:|[child1(==100)]-(20)-[child2(==100)]"
+					</code></pre>
+					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px. Big errors on smaller.</p>
+				</section>
+				<section>
+					<h2>How not to Create Unsatisfiable Constraints</h2>
+					<pre><code class="objc" data-trim contenteditable>
+  @"H:|[child1(==100@900)]-(20@700)-[child2(==100@800)]"
+					</code></pre>
+					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px</p>
+				</section>
+				<section>
+					<h2>How not to Create Unsatisfiable Constraints</h2>
+					<p>or:</p>
+					<pre><code class="objc" data-trim contenteditable>
+  @"H:|[child1(>=100@999)]-(20@999)-[child2(<=100)]"
+					</code></pre>
+					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px</p>
 				</section>
 
 				<section>
@@ -177,8 +200,10 @@
 
 				<section>
 					<h2>How to Create Ambiguous Layout</h2>
-					* Not enough constraints
-					* Overly complicated views
+					<p>Not enough constraints</p>
+					<p>Overly complicated views</p>
+					<h3>Simple Fix</h3>
+					<p>Test with - hasAmbiguousLayout, - exerciseAmbiguityInLayout</p>
 				</section>
 
 				<section>
@@ -192,7 +217,21 @@
 				</section>
 
 				<section>
-					<h2>Final Tips</h2>
+					<h2>How to Trigger a Crash</h2>
+					<p>Forget to add views to their parent</p>
+					<p>Typos in metrics and view names</p>		
+				</section>
+
+				<section>
+					<h2>How to Trigger a Crash</h2>
+					<p>Remove constraints in updateConstraints</p>
+					<h3>Simple Fix</h3>
+					<p>Add constraints in init, modify in updateConstraints</p>
+					<p>Demonstrate switching between a bar and fullscreen by flipping the priorities of two constraints</p>
+				</section>
+
+				<section>
+					<h2>Common Principles</h2>
 					<p>Be Flexible (Yoga picture?)</p>
 					<p>Create simple views</p>
 					<p>The debugger is your friend. Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.</p>
