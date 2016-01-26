@@ -166,32 +166,32 @@
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
 					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[child1(==100)]-(20)-[child2(==100)]|"
+  @"H:|[green(==100)][blue(==100)]|"
 					</code></pre>
-					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px. Big errors on larger and smaller.</p>
+					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px. Big errors on larger and smaller.</p>
 				</section>
 
 				<section>
-					<h2>How to Create Unsatisfiable Constraints</h2>
+					<h2>How to Get Satisfaction</h2>
 					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[child1(==100)]-(20)-[child2(==100)]"
+  @"H:|[green(==100)][blue(==100)]"
 					</code></pre>
-					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px. Big errors on smaller.</p>
+					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px. Big errors on smaller.</p>
 				</section>
 				<section>
-					<h2>How not to Create Unsatisfiable Constraints</h2>
+					<h2>How to Get Satisfaction</h2>
 					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[child1(==100@900)]-(20@700)-[child2(==100@800)]"
+  @"H:|[green(==100@900)][blue(==100@999)]|"
 					</code></pre>
-					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px</p>
+					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px</p>
 				</section>
 				<section>
-					<h2>How not to Create Unsatisfiable Constraints</h2>
+					<h2>How to Get Satisfaction</h2>
 					<p>or:</p>
 					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[child1(>=100@999)]-(20@999)-[child2(<=100)]"
+  @"H:|[green(>=100@999)][blue(<=100)]"
 					</code></pre>
-					<p>TODO: Picture showing views smaller than 220px, 220px and larger than 220px</p>
+					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px</p>
 				</section>
 
 				<section>
