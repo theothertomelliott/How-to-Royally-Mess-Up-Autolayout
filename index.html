@@ -15,7 +15,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/league.css" id="theme">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
@@ -150,55 +150,103 @@
 				<section>
 					<h2>Unsatisfiable Constraints</h2>
 					<p>Simplified</p>
-					<img class="fragment" src="img/donaldduck-rage.gif"/>
+					<img class="fragment" src="img/donaldduck-rage.gif" style="background:none; border:none; box-shadow:none;"/>
 				</section>
 				
 				<section>
-					<h2>How to Create Unsatisfiable Constraints</h2>
-					<h3>Don't set up your views for autolayout</h3>
-					<p>By default, all views are configured for autoresizing</p>
-					<h3>Get satisfaction</h3>
-					<pre><code class="objc" data-trim contenteditable>
-					subview.translatesAutoresizingMaskIntoConstraints = NO;
-					</code></pre>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Forget to set up your views for autolayout</h4>
+						<p>By default, all views are configured for autoresizing</p>
+					</div>
 				</section>
 
 				<section>
-					<h2>How to Create Unsatisfiable Constraints</h2>
-					<pre><code class="objc" data-trim contenteditable>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
+subview.translatesAutoresizingMaskIntoConstraints = NO;
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Limit your view to a fixed size</h4>
+						<div style="padding: 20px;">
+							<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100)][blue(==100)]|"
-					</code></pre>
-					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px. Big errors on larger and smaller.</p>
+							</code></pre>
+						</div>
+						<img src="img/sizing-a.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+					</div>
 				</section>
 
 				<section>
-					<h2>How to Get Satisfaction</h2>
-					<h3>Don't constrain to both edges</h3>
-					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[green(==100)][blue(==100)]"
-					</code></pre>
-					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px. Big errors on smaller.</p>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Limit your view to a minimum/maxiumum size</h4>
+						<div style="padding: 20px;">
+						<pre><code class="objc" data-trim contenteditable>
+  @"H:|[leftView(==100)][rightView(<=100)]|"
+						</code></pre>
+						</div>
+						<img src="img/sizing-b.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+					</div>
 				</section>
 				<section>
-					<h2>How to Get Satisfaction</h2>
-					<h3>Use priorities</h3>
-					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[green(==100@900)][blue(==100@999)]|"
-					</code></pre>
-					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px</p>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<h4>Use priorities</h4>
+						<div style="padding: 20px;">
+						<pre><code class="objc" data-trim contenteditable>
+  @"H:|[green(==100@999)][blue(==100@800)]|"
+						</code></pre>
+						</div>
+						<img src="img/sizing-c.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+					</div>
 				</section>
 				<section>
-					<h2>How to Get Satisfaction</h2>
-					<h3>Use inequalities</h3>
-					<pre><code class="objc" data-trim contenteditable>
-  @"H:|[green(>=100@999)][blue(<=100)]"
-					</code></pre>
-					<p>TODO: Picture showing views smaller than 200px, 200px and larger than 200px</p>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<h4>Priorities + Inequalities</h4>
+						<div style="padding: 20px;">
+						<pre><code class="objc" data-trim contenteditable>
+  @"H:|[green(>=100@999)][blue(==100@800)]"
+						</code></pre>
+						</div>
+						<img src="img/sizing-d.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+					</div>
 				</section>
 				<section>
-					<h2>How to Get Satisfaction</h2>
-					<h3>Use UIStackLayout</h3>
-					<p>TODO: Add UIStackLayout example</p>
+					<h4>Unsatisfiable Constraints</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<h4>Use UIStackLayout</h4>
+						<div>
+						<pre><code class="objc" data-trim contenteditable>
+[green.heightAnchor constraintEqualToConstant:100].active = true;
+[green.widthAnchor constraintEqualToConstant:100].active = true;
+[blue.heightAnchor constraintEqualToConstant:100].active = true;
+[blue.widthAnchor constraintEqualToConstant:100].active = true;
+    
+stack.axis = UILayoutConstraintAxisHorizontal;
+stack.distribution = UIStackViewDistributionEqualSpacing;
+stack.alignment = UIStackViewAlignmentCenter;
+    
+[stack addArrangedSubview:green];
+[stack addArrangedSubview:blue];
+						</code></pre>
+						</div>
+						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none;"/>
+					</div>
 				</section>
 
 				<section>
