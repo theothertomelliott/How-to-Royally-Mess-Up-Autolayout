@@ -155,7 +155,7 @@
 				
 				<section>
 					<h2>How to Create Unsatisfiable Constraints</h2>
-					<p>Don't set up your views for autolayout</p>
+					<h3>Don't set up your views for autolayout</h3>
 					<p>By default, all views are configured for autoresizing</p>
 					<h3>Get satisfaction</h3>
 					<pre><code class="objc" data-trim contenteditable>
@@ -173,6 +173,7 @@
 
 				<section>
 					<h2>How to Get Satisfaction</h2>
+					<h3>Don't constrain to both edges</h3>
 					<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100)][blue(==100)]"
 					</code></pre>
@@ -180,6 +181,7 @@
 				</section>
 				<section>
 					<h2>How to Get Satisfaction</h2>
+					<h3>Use priorities</h3>
 					<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100@900)][blue(==100@999)]|"
 					</code></pre>
@@ -187,7 +189,7 @@
 				</section>
 				<section>
 					<h2>How to Get Satisfaction</h2>
-					<p>or:</p>
+					<h3>Use inequalities</h3>
 					<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(>=100@999)][blue(<=100)]"
 					</code></pre>
