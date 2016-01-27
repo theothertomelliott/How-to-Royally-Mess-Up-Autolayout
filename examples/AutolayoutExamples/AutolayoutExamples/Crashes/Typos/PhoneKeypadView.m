@@ -63,7 +63,6 @@
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[four(==one)][five(==one)][six(==one)]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[seven(==one)][eight(==one)][nine(==one)]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[star(==one)][zero(==one)][hash(==one)]|" options:0 metrics:nil views:views]];
-
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[one][four(==one)][seven(==one)][star(==one)]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[two(==one)][five(==one)][eight(==one)][zero(==one)]|" options:0 metrics:nil views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[three(==one)][six(==one)][nine(==one)][hash(==one)]|" options:0 metrics:nil views:views]];

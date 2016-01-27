@@ -272,6 +272,70 @@ stack.alignment = UIStackViewAlignmentCenter;
 				</section>
 
 				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Typos</h4>
+						<img src="img/typo-keypad.png" style="background:none; border:none; box-shadow:none;"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Typos</h4>
+						<pre><code class="objc" data-trim contenteditable>
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"H:|[one][two(==one)][three(==one)]|"
+        options:0 metrics:nil views:views]];
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"H:|[four(==one)][five(==one)][six(==one)]|" 
+    options:0 metrics:nil views:views]];
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"H:|[seven(==one)][eigdt(==one)][nine(==one)]|"
+    options:0 metrics:nil views:views]];
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"H:|[star(==one)][zero(==one)][hash(==one)]|"
+    options:0 metrics:nil views:views]];
+    				</code></pre>
+    				</div>
+    			</section>
+
+    							<section>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Typos (part 2)</h4>
+						<pre><code class="objc" data-trim contenteditable>
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"V:|[one][four(==one)][seven(==one)][star(==one)]|"
+    options:0 metrics:nil views:views]];
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"V:|[two(==one)][five(==one)][eight(==one)][zero(==one)]|"
+    options:0 metrics:nil views:views]];
+[self addConstraints:
+  [NSLayoutConstraint 
+    constraintsWithVisualFormat:
+      @"V:|[three(==one)][six(==one)][nine(==one)][hash(==one)]|"
+    options:0 metrics:nil views:views]];
+    				</code></pre>
+    				</div>
+    			</section>
+
+				<section>
 					<h2>How to Trigger a Crash</h2>
 					<p>Remove constraints in updateConstraints</p>
 					<h3>Simple Fix</h3>
