@@ -13,6 +13,7 @@
 		E22F89E91C56FFBA00559E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22F89E71C56FFBA00559E41 /* Main.storyboard */; };
 		E22F89EB1C56FFBA00559E41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22F89EA1C56FFBA00559E41 /* Assets.xcassets */; };
 		E22F89EE1C56FFBA00559E41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22F89EC1C56FFBA00559E41 /* LaunchScreen.storyboard */; };
+		E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,8 @@
 		E22F89EA1C56FFBA00559E41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E22F89ED1C56FFBA00559E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E22F89EF1C56FFBA00559E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2A987AB1C58F96F006EE7D3 /* PhoneKeypadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneKeypadView.h; path = Crashes/Typos/PhoneKeypadView.h; sourceTree = "<group>"; };
+		E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneKeypadView.m; path = Crashes/Typos/PhoneKeypadView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 		E22F89DD1C56FFBA00559E41 /* AutolayoutExamples */ = {
 			isa = PBXGroup;
 			children = (
+				E2A987A31C58F89F006EE7D3 /* Crashes */,
 				E22F89E11C56FFBA00559E41 /* AppDelegate.h */,
 				E22F89E21C56FFBA00559E41 /* AppDelegate.m */,
 				E22F89E41C56FFBA00559E41 /* ViewController.h */,
@@ -77,6 +81,23 @@
 				E22F89DF1C56FFBA00559E41 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E2A987A31C58F89F006EE7D3 /* Crashes */ = {
+			isa = PBXGroup;
+			children = (
+				E2A987A41C58F8A5006EE7D3 /* Typos */,
+			);
+			name = Crashes;
+			sourceTree = "<group>";
+		};
+		E2A987A41C58F8A5006EE7D3 /* Typos */ = {
+			isa = PBXGroup;
+			children = (
+				E2A987AB1C58F96F006EE7D3 /* PhoneKeypadView.h */,
+				E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */,
+			);
+			name = Typos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,6 +173,7 @@
 				E22F89E61C56FFBA00559E41 /* ViewController.m in Sources */,
 				E22F89E31C56FFBA00559E41 /* AppDelegate.m in Sources */,
 				E22F89E01C56FFBA00559E41 /* main.m in Sources */,
+				E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +322,7 @@
 				E22F89F41C56FFBA00559E41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
