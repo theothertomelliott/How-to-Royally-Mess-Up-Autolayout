@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Autolayout - And How to Royally Mess It Up</title>
+		<title>Auto Layout - And How to Royally Mess It Up</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Tom Elliott">
@@ -41,7 +41,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Autolayout</h1>
+					<h1>Auto Layout</h1>
 					<h3>And How to Royally Mess It Up</h3>
 					<p>
 						<small>Tom Elliott / <a href="http://telliott.io">telliott.io</a> / <a href="http://twitter.com/theotherelliott">@theotherelliott</a></small>
@@ -81,7 +81,7 @@
 				</section>
 
 				<section>
-					<h2>Programmatic Autolayout</h2>
+					<h2>Programmatic Auto Layout</h2>
 					<p>
 					Constraints
 					</p>
@@ -310,7 +310,7 @@ stack.alignment = UIStackViewAlignmentCenter;
     				</div>
     			</section>
 
-    							<section>
+    			<section>
 					<h4>Crashes</h4>
 					<h2 style="color: red;">How to Break It</h2>
 					<div class="stretch">
@@ -334,6 +334,84 @@ stack.alignment = UIStackViewAlignmentCenter;
     				</code></pre>
     				</div>
     			</section>
+
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<h4>Simpler Views</h4>
+						<img src="img/typo-keypad-fixed.png" style="background:none; border:none; box-shadow:none;"/>
+					</div>
+				</section>
+
+    			<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
+@implementation PhoneKeypadRowView
+
+- (id) initWithLeft:(UIButton*)left middle:(UIButton*)middle right:(UIButton*)right {
+  if(self = [super init]){
+    [self addSubview:left]; [self addSubview:middle]; [self addSubview:right];
+    NSDictionary *views = NSDictionaryOfVariableBindings(left,middle,right);
+    [self addConstraints:[self fullVConstraints:left]];
+    [self addConstraints:[self fullVConstraints:middle]];
+    [self addConstraints:[self fullVConstraints:right]];
+        
+    [self addConstraints: [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|[left][middle(==left)][right(==left)]|"
+      options:0 metrics:nil views:views]];
+  }
+  return self;
+}
+
+- (NSArray<__kindof NSLayoutConstraint *> *) fullVConstraints:(UIView *)view {
+  return [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{ @"view" : view }];
+}
+					</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
+  // ...
+  PhoneKeypadRowView *row1 = [self rowWithLeft:digits[7] middle:digits[8] right:digits[9]];
+  PhoneKeypadRowView *row2 = [self rowWithLeft:digits[4] middle:digits[5] right:digits[6]];
+  PhoneKeypadRowView *row3 = [self rowWithLeft:digits[1] middle:digits[2] right:digits[3]];
+  PhoneKeypadRowView *row4 = [self rowWithLeft:hash middle:digits[0] right:star];
+    
+  NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
+  [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
+    @"V:|[row1][row2(==row1)][row3(==row1)][row4(==row1)]|" 
+    options:0 metrics:nil views:views]];
+    
+  [self addConstraints:[self fullHConstraints:row1]];
+  [self addConstraints:[self fullHConstraints:row2]];
+  [self addConstraints:[self fullHConstraints:row3]];
+  [self addConstraints:[self fullHConstraints:row4]];
+}
+
+- (PhoneKeypadRowView *) rowWithLeft:(UIButton *)left middle:(UIButton *)middle right:(UIButton *)right {
+  PhoneKeypadRowView *row = [[PhoneKeypadRowView alloc] initWithLeft:left middle:middle right:right];
+// ...
+
+					</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Remove constraints in updateConstraints:</h4>
+						<pre><code class="objc" data-trim contenteditable>
+						</code></pre>
+					</div>
+				</section>
 
 				<section>
 					<h2>How to Trigger a Crash</h2>
