@@ -193,7 +193,7 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 						<h4>Limit your view to a minimum/maxiumum size</h4>
 						<div style="padding: 20px;">
 						<pre><code class="objc" data-trim contenteditable>
-  @"H:|[leftView(==100)][rightView(<=100)]|"
+  @"H:|[green(==100)][blue(<=100)]|"
 						</code></pre>
 						</div>
 						<img src="img/sizing-b.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
@@ -251,6 +251,38 @@ stack.alignment = UIStackViewAlignmentCenter;
 
 				<section>
 					<h2>Ambiguous Layout</h2>
+					<ul>
+						<li class="fragment">Multiple solutions to constraints</li>
+						<li class="fragment"><code class="objc">hasAmbiguousLayout</code></li>
+						<li class="fragment"><code class="objc">exerciseAmbiguityInLayout</code></li>
+					</ul>
+				</section>
+
+				<section>
+					<h4>Ambiguous Layout</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Inequalities</h4>
+						<pre><code class="objc" data-trim contenteditable>
+@"H:|[green(>=5)][blue(>=5)]"
+@"H:|[green(<=100)][blue(<=100)]"
+						</code></pre>
+						<img src="img/ambiguity-a.png" style="background:none; border:none; box-shadow:none;"/>
+					</div>
+				</section>
+
+				<section>
+					<h4>Ambiguous Layout</h4>
+					<h2 style="color: green;">How (Almost) Not to Break It</h2>
+					<div class="stretch">
+						<h4>Add Bounds</h4>
+						<pre><code class="objc" data-trim contenteditable>
+@"H:[leftView(>=5)]-(==100@999)-[rightView(>=5)]"
+@"H:|[leftView(<=100)]-(==100@999)-[rightView(<=100)]|"
+						</code></pre>
+						<img src="img/ambiguity-b.png" style="background:none; border:none; box-shadow:none;"/>
+						<p>Ambiguous at any other size</p>
+					</div>
 				</section>
 
 				<section>
@@ -379,6 +411,8 @@ stack.alignment = UIStackViewAlignmentCenter;
 					<div class="stretch">
 						<pre><code class="objc" data-trim contenteditable>
   // ...
+
+  // TODO: Make this an array of rows
   PhoneKeypadRowView *row1 = [self rowWithLeft:digits[7] middle:digits[8] right:digits[9]];
   PhoneKeypadRowView *row2 = [self rowWithLeft:digits[4] middle:digits[5] right:digits[6]];
   PhoneKeypadRowView *row3 = [self rowWithLeft:digits[1] middle:digits[2] right:digits[3]];
@@ -389,6 +423,7 @@ stack.alignment = UIStackViewAlignmentCenter;
     @"V:|[row1][row2(==row1)][row3(==row1)][row4(==row1)]|" 
     options:0 metrics:nil views:views]];
     
+  // Make this a for loop
   [self addConstraints:[self fullHConstraints:row1]];
   [self addConstraints:[self fullHConstraints:row2]];
   [self addConstraints:[self fullHConstraints:row3]];

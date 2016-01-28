@@ -15,6 +15,8 @@
 		E22F89EE1C56FFBA00559E41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22F89EC1C56FFBA00559E41 /* LaunchScreen.storyboard */; };
 		E2A10C741C59B3FA003BAA76 /* PhoneKeypadImprovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A10C731C59B3FA003BAA76 /* PhoneKeypadImprovedView.m */; };
 		E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */; };
+		E2AF12511C5A4AD60082D911 /* SideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AF12501C5A4AD60082D911 /* SideBySideView.m */; };
+		E2AF12541C5A4AF00082D911 /* AmbiguousSideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AF12531C5A4AF00082D911 /* AmbiguousSideBySideView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,10 @@
 		E2A10C731C59B3FA003BAA76 /* PhoneKeypadImprovedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneKeypadImprovedView.m; path = Crashes/Typos/PhoneKeypadImprovedView.m; sourceTree = "<group>"; };
 		E2A987AB1C58F96F006EE7D3 /* PhoneKeypadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneKeypadView.h; path = Crashes/Typos/PhoneKeypadView.h; sourceTree = "<group>"; };
 		E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneKeypadView.m; path = Crashes/Typos/PhoneKeypadView.m; sourceTree = "<group>"; };
+		E2AF124F1C5A4AD60082D911 /* SideBySideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideBySideView.h; sourceTree = "<group>"; };
+		E2AF12501C5A4AD60082D911 /* SideBySideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideBySideView.m; sourceTree = "<group>"; };
+		E2AF12521C5A4AF00082D911 /* AmbiguousSideBySideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AmbiguousSideBySideView.h; path = AmbiguousLayout/AmbiguousSideBySideView.h; sourceTree = "<group>"; };
+		E2AF12531C5A4AF00082D911 /* AmbiguousSideBySideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmbiguousSideBySideView.m; path = AmbiguousLayout/AmbiguousSideBySideView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +70,9 @@
 		E22F89DD1C56FFBA00559E41 /* AutolayoutExamples */ = {
 			isa = PBXGroup;
 			children = (
+				E2AF124F1C5A4AD60082D911 /* SideBySideView.h */,
+				E2AF12501C5A4AD60082D911 /* SideBySideView.m */,
+				E2AF124E1C5A4A5D0082D911 /* Ambiguous Layout */,
 				E2A987A31C58F89F006EE7D3 /* Crashes */,
 				E22F89E11C56FFBA00559E41 /* AppDelegate.h */,
 				E22F89E21C56FFBA00559E41 /* AppDelegate.m */,
@@ -103,6 +112,15 @@
 				E2A10C731C59B3FA003BAA76 /* PhoneKeypadImprovedView.m */,
 			);
 			name = Typos;
+			sourceTree = "<group>";
+		};
+		E2AF124E1C5A4A5D0082D911 /* Ambiguous Layout */ = {
+			isa = PBXGroup;
+			children = (
+				E2AF12521C5A4AF00082D911 /* AmbiguousSideBySideView.h */,
+				E2AF12531C5A4AF00082D911 /* AmbiguousSideBySideView.m */,
+			);
+			name = "Ambiguous Layout";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -180,6 +198,8 @@
 				E22F89E01C56FFBA00559E41 /* main.m in Sources */,
 				E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */,
 				E2A10C741C59B3FA003BAA76 /* PhoneKeypadImprovedView.m in Sources */,
+				E2AF12511C5A4AD60082D911 /* SideBySideView.m in Sources */,
+				E2AF12541C5A4AF00082D911 /* AmbiguousSideBySideView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
