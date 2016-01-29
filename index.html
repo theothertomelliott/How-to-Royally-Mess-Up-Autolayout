@@ -350,6 +350,7 @@ stack.alignment = UIStackViewAlignmentCenter;
       @"V:|[three(==one)][six(==one)][nine(==one)][hash(==one)]|"
     options:0 metrics:nil views:views]];
     				</code></pre>
+    				<p>Seven blocks of VFL</p>
     				</div>
     			</section>
 
@@ -362,21 +363,50 @@ stack.alignment = UIStackViewAlignmentCenter;
 					</div>
 				</section>
 
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
+PhoneRowView *row1 = [[PhoneRowView alloc] initWithLeft:digits[7] 
+                                                 middle:digits[8] 
+                                                  right:digits[9]];
+PhoneRowView *row2 = [[PhoneRowView alloc] initWithLeft:digits[4]
+                                                 middle:digits[5] 
+                                                  right:digits[6]];
+PhoneRowView *row3 = [[PhoneRowView alloc] initWithLeft:digits[1] 
+                                                 middle:digits[2]
+                                                  right:digits[3]];
+PhoneRowView *row4 = [[[PhoneRowView alloc] initWithLeft:hash 
+                                                  middle:digits[0]
+                                                   right:star];
+  
+// OMITTED: Prepare rows for Auto Layout, add to view
+// and make full width (H:|[view]|)
+    
+NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
+[self addConstraints:[NSLayoutConstraint 
+                         constraintsWithVisualFormat:
+                         @"V:|[row1][row2(==row1)][row3(==row1)][row4(==row1)]|" 
+                         options:0 metrics:nil views:views]];
+					</code></pre>
+					</div>
+				</section>
+
     			<section>
 					<h4>Crashes</h4>
 					<h2 style="color: green;">How Not to Break It</h2>
 					<div class="stretch">
 						<pre><code class="objc" data-trim contenteditable>
-@implementation PhoneKeypadRowView
+@implementation PhoneRowView
 
 - (id) initWithLeft:(UIButton*)left middle:(UIButton*)middle right:(UIButton*)right {
   if(self = [super init]){
     [self addSubview:left]; [self addSubview:middle]; [self addSubview:right];
     NSDictionary *views = NSDictionaryOfVariableBindings(left,middle,right);
-    [self addConstraints:[self fullVConstraints:left]];
-    [self addConstraints:[self fullVConstraints:middle]];
-    [self addConstraints:[self fullVConstraints:right]];
-        
+    
+    // OMITTED: Make our left, right and middle views full-height (V:|[view]|)
+
     [self addConstraints: [NSLayoutConstraint
       constraintsWithVisualFormat:@"H:|[left][middle(==left)][right(==left)]|"
       options:0 metrics:nil views:views]];
@@ -384,43 +414,9 @@ stack.alignment = UIStackViewAlignmentCenter;
   return self;
 }
 
-- (NSArray<__kindof NSLayoutConstraint *> *) fullVConstraints:(UIView *)view {
-  return [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[view]|" options:0 metrics:nil views:@{ @"view" : view }];
-}
+@end
 					</code></pre>
-					</div>
-				</section>
-
-				<section>
-					<h4>Crashes</h4>
-					<h2 style="color: green;">How Not to Break It</h2>
-					<div class="stretch">
-						<pre><code class="objc" data-trim contenteditable>
-  // ...
-
-  // TODO: Make this an array of rows
-  PhoneKeypadRowView *row1 = [self rowWithLeft:digits[7] middle:digits[8] right:digits[9]];
-  PhoneKeypadRowView *row2 = [self rowWithLeft:digits[4] middle:digits[5] right:digits[6]];
-  PhoneKeypadRowView *row3 = [self rowWithLeft:digits[1] middle:digits[2] right:digits[3]];
-  PhoneKeypadRowView *row4 = [self rowWithLeft:hash middle:digits[0] right:star];
-    
-  NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
-  [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:
-    @"V:|[row1][row2(==row1)][row3(==row1)][row4(==row1)]|" 
-    options:0 metrics:nil views:views]];
-    
-  // Make this a for loop
-  [self addConstraints:[self fullHConstraints:row1]];
-  [self addConstraints:[self fullHConstraints:row2]];
-  [self addConstraints:[self fullHConstraints:row3]];
-  [self addConstraints:[self fullHConstraints:row4]];
-}
-
-- (PhoneKeypadRowView *) rowWithLeft:(UIButton *)left middle:(UIButton *)middle right:(UIButton *)right {
-  PhoneKeypadRowView *row = [[PhoneKeypadRowView alloc] initWithLeft:left middle:middle right:right];
-// ...
-
-					</code></pre>
+					<p>Four blocks of VFL at most</p>
 					</div>
 				</section>
 
