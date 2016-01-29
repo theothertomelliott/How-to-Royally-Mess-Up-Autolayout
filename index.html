@@ -118,11 +118,14 @@
 				</section>
 
 				<section>
+					<h2>Solution of simultaneous equations</h2>
+				</section>
+
+				<section>
 					<h2>What Could Go Wrong?</h2>
 					<ol>
 					<li class="fragment">Unsatisfiable Constraints</li>
 					<li class="fragment">Ambiguous Layout</li>
-					<li class="fragment">Inflexible Layout</li>
 					<li class="fragment">Crashes</li>
 					</ol>
 				</section>
@@ -268,39 +271,35 @@ stack.alignment = UIStackViewAlignmentCenter;
 @"H:|[green(<=100)][blue(<=100)]"
 						</code></pre>
 						<img src="img/ambiguity-a.png" style="background:none; border:none; box-shadow:none;"/>
+						<p>
+						<pre>
+						<code class="objc" data-trim>
+[green hasAmbiguousLayout] == YES && [blue hasAmbiguousLayout] == YES</code>
+						</pre>
+						</p>
 					</div>
 				</section>
 
 				<section>
 					<h4>Ambiguous Layout</h4>
-					<h2 style="color: green;">How (Almost) Not to Break It</h2>
+					<h2 style="color: green;">How Not to Break It</h2>
 					<div class="stretch">
-						<h4>Add Bounds</h4>
+						<h4>Add a Deciding Constraint</h4>
 						<pre><code class="objc" data-trim contenteditable>
-@"H:[leftView(>=5)]-(==100@999)-[rightView(>=5)]"
-@"H:|[leftView(<=100)]-(==100@999)-[rightView(<=100)]|"
+@"H:|[leftView(==rightView)]"
+@"H:|[leftView(<=100)][spacer(==leftView@999)][rightView(<=100)]|"
 						</code></pre>
 						<img src="img/ambiguity-b.png" style="background:none; border:none; box-shadow:none;"/>
-						<p>Ambiguous at any other size</p>
+						<p>Spacer is a UIView used to support up to 300px</p>
 					</div>
 				</section>
 
 				<section>
-					<h2>How to Create Ambiguous Layout</h2>
-					<p>Not enough constraints</p>
-					<p>Overly complicated views</p>
-					<h3>Simple Fix</h3>
-					<p>Test with - hasAmbiguousLayout, - exerciseAmbiguityInLayout</p>
-				</section>
-
-				<section>
-					<h2>Inflexible Layout</h2>
-				</section>
-
-				<section>
-					<h2>How to Create Inflexible Layout</h2>
-					* Only code to a single view size
-					<h3>Simple Fix</h3>
+					<h2>Crashes</h2>
+					<ul>
+						<li class="fragment">Bad Visual Format Language strings</li>
+						<li class="fragment">Removing constraints in the wrong place</li>
+					</ul>
 				</section>
 
 				<section>
