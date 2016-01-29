@@ -448,19 +448,34 @@ stack.alignment = UIStackViewAlignmentCenter;
 				</section>
 
 				<section>
-					<h2>How to Trigger a Crash</h2>
-					<p>Remove constraints in updateConstraints</p>
-					<h3>Simple Fix</h3>
-					<p>Add constraints in init, modify in updateConstraints</p>
-					<p>Demonstrate switching between a bar and fullscreen by flipping the priorities of two constraints</p>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How Not to Break It</h2>
+					<div class="stretch">
+						<h4>Modify constraint priorities</h4>
+						<pre><code class="objc" data-trim contenteditable>
+						</code></pre>
+					</div>
 				</section>
 
 				<section>
-					<h2>Common Principles</h2>
-					<p>Be Flexible (Yoga picture?)</p>
-					<p>Create simple views</p>
-					<p>The debugger is your friend. Make a symbolic breakpoint at UIViewAlertForUnsatisfiableConstraints to catch this in the debugger.</p>
-					<p>Use UIStackLayout</p>
+					<h2>Conclusions</h2>
+				</section>
+
+				<section>
+					<h2>Placement is easy, sizing is hard</h2>
+				</section>
+
+				<section>
+					<h2>Be Flexible</h2>
+					<p>TODO: Add Yoga picture?</p>
+				</section>
+
+				<section>
+					<h2>Keep it Simple</h2>
+				</section>
+
+				<section>
+					<h2>Use UIStackLayout</h2>
 				</section>
 
 				<section style="text-align: left;">
