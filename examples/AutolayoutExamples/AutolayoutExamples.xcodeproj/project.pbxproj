@@ -18,6 +18,7 @@
 		E2AF12511C5A4AD60082D911 /* SideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AF12501C5A4AD60082D911 /* SideBySideView.m */; };
 		E2AF12541C5A4AF00082D911 /* AmbiguousSideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AF12531C5A4AF00082D911 /* AmbiguousSideBySideView.m */; };
 		E2C6D3771C5AE518009C6B8D /* LessAmbiguousSideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6D3761C5AE518009C6B8D /* LessAmbiguousSideBySideView.m */; };
+		E2C6D37B1C5B9A73009C6B8D /* SwappingPriorities.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C6D37A1C5B9A73009C6B8D /* SwappingPriorities.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,8 @@
 		E2AF12531C5A4AF00082D911 /* AmbiguousSideBySideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AmbiguousSideBySideView.m; path = AmbiguousLayout/AmbiguousSideBySideView.m; sourceTree = "<group>"; };
 		E2C6D3751C5AE518009C6B8D /* LessAmbiguousSideBySideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LessAmbiguousSideBySideView.h; path = AmbiguousLayout/LessAmbiguousSideBySideView.h; sourceTree = "<group>"; };
 		E2C6D3761C5AE518009C6B8D /* LessAmbiguousSideBySideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LessAmbiguousSideBySideView.m; path = AmbiguousLayout/LessAmbiguousSideBySideView.m; sourceTree = "<group>"; };
+		E2C6D3791C5B9A73009C6B8D /* SwappingPriorities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwappingPriorities.h; path = "Removing Constraints/SwappingPriorities.h"; sourceTree = "<group>"; };
+		E2C6D37A1C5B9A73009C6B8D /* SwappingPriorities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwappingPriorities.m; path = "Removing Constraints/SwappingPriorities.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +76,7 @@
 		E22F89DD1C56FFBA00559E41 /* AutolayoutExamples */ = {
 			isa = PBXGroup;
 			children = (
+				E2C6D3781C5B9A44009C6B8D /* Removing Constraints */,
 				E2AF124F1C5A4AD60082D911 /* SideBySideView.h */,
 				E2AF12501C5A4AD60082D911 /* SideBySideView.m */,
 				E2AF124E1C5A4A5D0082D911 /* Ambiguous Layout */,
@@ -126,6 +130,15 @@
 				E2C6D3761C5AE518009C6B8D /* LessAmbiguousSideBySideView.m */,
 			);
 			name = "Ambiguous Layout";
+			sourceTree = "<group>";
+		};
+		E2C6D3781C5B9A44009C6B8D /* Removing Constraints */ = {
+			isa = PBXGroup;
+			children = (
+				E2C6D3791C5B9A73009C6B8D /* SwappingPriorities.h */,
+				E2C6D37A1C5B9A73009C6B8D /* SwappingPriorities.m */,
+			);
+			name = "Removing Constraints";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +213,7 @@
 			files = (
 				E22F89E61C56FFBA00559E41 /* ViewController.m in Sources */,
 				E22F89E31C56FFBA00559E41 /* AppDelegate.m in Sources */,
+				E2C6D37B1C5B9A73009C6B8D /* SwappingPriorities.m in Sources */,
 				E22F89E01C56FFBA00559E41 /* main.m in Sources */,
 				E2C6D3771C5AE518009C6B8D /* LessAmbiguousSideBySideView.m in Sources */,
 				E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */,
