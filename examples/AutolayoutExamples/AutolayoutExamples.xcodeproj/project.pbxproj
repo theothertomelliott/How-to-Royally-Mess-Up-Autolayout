@@ -13,6 +13,7 @@
 		E22F89E91C56FFBA00559E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22F89E71C56FFBA00559E41 /* Main.storyboard */; };
 		E22F89EB1C56FFBA00559E41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E22F89EA1C56FFBA00559E41 /* Assets.xcassets */; };
 		E22F89EE1C56FFBA00559E41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E22F89EC1C56FFBA00559E41 /* LaunchScreen.storyboard */; };
+		E2927B3E1C5D2267003369BA /* SwappingPrioritiesCrash.m in Sources */ = {isa = PBXBuildFile; fileRef = E2927B3D1C5D2267003369BA /* SwappingPrioritiesCrash.m */; };
 		E2A10C741C59B3FA003BAA76 /* PhoneKeypadImprovedView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A10C731C59B3FA003BAA76 /* PhoneKeypadImprovedView.m */; };
 		E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2A987AC1C58F96F006EE7D3 /* PhoneKeypadView.m */; };
 		E2AF12511C5A4AD60082D911 /* SideBySideView.m in Sources */ = {isa = PBXBuildFile; fileRef = E2AF12501C5A4AD60082D911 /* SideBySideView.m */; };
@@ -32,6 +33,8 @@
 		E22F89EA1C56FFBA00559E41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E22F89ED1C56FFBA00559E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E22F89EF1C56FFBA00559E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E2927B3C1C5D2267003369BA /* SwappingPrioritiesCrash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SwappingPrioritiesCrash.h; path = "Removing Constraints/SwappingPrioritiesCrash.h"; sourceTree = "<group>"; };
+		E2927B3D1C5D2267003369BA /* SwappingPrioritiesCrash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SwappingPrioritiesCrash.m; path = "Removing Constraints/SwappingPrioritiesCrash.m"; sourceTree = "<group>"; };
 		E2A10C721C59B3FA003BAA76 /* PhoneKeypadImprovedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneKeypadImprovedView.h; path = Crashes/Typos/PhoneKeypadImprovedView.h; sourceTree = "<group>"; };
 		E2A10C731C59B3FA003BAA76 /* PhoneKeypadImprovedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PhoneKeypadImprovedView.m; path = Crashes/Typos/PhoneKeypadImprovedView.m; sourceTree = "<group>"; };
 		E2A987AB1C58F96F006EE7D3 /* PhoneKeypadView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PhoneKeypadView.h; path = Crashes/Typos/PhoneKeypadView.h; sourceTree = "<group>"; };
@@ -137,6 +140,8 @@
 			children = (
 				E2C6D3791C5B9A73009C6B8D /* SwappingPriorities.h */,
 				E2C6D37A1C5B9A73009C6B8D /* SwappingPriorities.m */,
+				E2927B3C1C5D2267003369BA /* SwappingPrioritiesCrash.h */,
+				E2927B3D1C5D2267003369BA /* SwappingPrioritiesCrash.m */,
 			);
 			name = "Removing Constraints";
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 				E22F89E01C56FFBA00559E41 /* main.m in Sources */,
 				E2C6D3771C5AE518009C6B8D /* LessAmbiguousSideBySideView.m in Sources */,
 				E2A987AD1C58F96F006EE7D3 /* PhoneKeypadView.m in Sources */,
+				E2927B3E1C5D2267003369BA /* SwappingPrioritiesCrash.m in Sources */,
 				E2A10C741C59B3FA003BAA76 /* PhoneKeypadImprovedView.m in Sources */,
 				E2AF12511C5A4AD60082D911 /* SideBySideView.m in Sources */,
 				E2AF12541C5A4AF00082D911 /* AmbiguousSideBySideView.m in Sources */,

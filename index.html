@@ -46,9 +46,6 @@
 					<p>
 						<small>Tom Elliott / <a href="http://telliott.io">telliott.io</a> / <a href="http://twitter.com/theotherelliott">@theotherelliott</a></small>
 					</p>
-					<p>
-						<small>"I'm trying to remember why there's a backslash to my left, but it escapes me."</small>
-					</p>
 				</section>
 
 				<!-- Not sure if this section is needed
@@ -218,29 +215,6 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
 					</div>
 				</section>
-				<section>
-					<h4>Unsatisfiable Constraints</h4>
-					<h2 style="color: green;">How Not to Break It</h2>
-					<div class="stretch">
-						<h4>Use UIStackLayout</h4>
-						<div>
-						<pre><code class="objc" data-trim contenteditable>
-[green.heightAnchor constraintEqualToConstant:100].active = true;
-[green.widthAnchor constraintEqualToConstant:100].active = true;
-[blue.heightAnchor constraintEqualToConstant:100].active = true;
-[blue.widthAnchor constraintEqualToConstant:100].active = true;
-    
-stack.axis = UILayoutConstraintAxisHorizontal;
-stack.distribution = UIStackViewDistributionEqualSpacing;
-stack.alignment = UIStackViewAlignmentCenter;
-    
-[stack addArrangedSubview:green];
-[stack addArrangedSubview:blue];
-						</code></pre>
-						</div>
-						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none;"/>
-					</div>
-				</section>
 
 				<section>
 					<h2>Ambiguous Layout</h2>
@@ -288,7 +262,6 @@ stack.alignment = UIStackViewAlignmentCenter;
 					<h2>Crashes</h2>
 					<ul>
 						<li class="fragment">Bad Visual Format Language strings</li>
-						<li class="fragment">Removing constraints in the wrong place</li>
 					</ul>
 				</section>
 
@@ -424,22 +397,148 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 				</section>
 
 				<section>
-					<h4>Crashes</h4>
-					<h2 style="color: red;">How to Break It</h2>
+					<h2>Additional Best Practices</h2>
+				</section>
+
+				<section>
+					<h2>Avoid Adding/Removing Constraints</h2>
+					<ul>
+						<li>Add constraints up-front in the init method</li>
+						<li>Change properties rather than replacing constraints</li>
+				</section>
+
+				<section>
+					<h4>Avoid Adding/Removing Constraints</h4>
+					<h2 style="color: red;">Not ideal</h2>
 					<div class="stretch">
-						<h4>Remove constraints in updateConstraints:</h4>
 						<pre><code class="objc" data-trim contenteditable>
+- (void) updateConstraints {
+    if(self.isExpanded){
+        [self removeConstraint:self.heightConstraintCollapsed];
+        [self addConstraint:self.heightConstraintExpanded];
+    } else {
+        [self removeConstraint:self.heightConstraintExpanded];
+        [self addConstraint:self.heightConstraintCollapsed];
+    }
+    [super updateConstraints];
+}
 						</code></pre>
 					</div>
 				</section>
 
 				<section>
-					<h4>Crashes</h4>
-					<h2 style="color: red;">How Not to Break It</h2>
+					<h4>Avoid Adding/Removing Constraints</h4>
+					<h2 style="color: red;">Very Bad</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
+- (void) updateConstraints {
+    [self removeConstraints:self.constraints];
+    [self addConstraints:[NSLayoutConstraint 
+                         constraintsWithVisualFormat:@"H:|[content]|" 
+                                             options:0 
+                                             metrics:nil
+                                               views:@{@"content" : self.content}]];
+    [self addConstraint:[NSLayoutConstraint 
+                            constraintWithItem:self.content
+                                     attribute:NSLayoutAttributeHeight
+                                     relatedBy:NSLayoutRelationEqual
+                                        toItem:nil
+                                     attribute:NSLayoutAttributeNotAnAttribute
+                                    multiplier:1.0
+                                      constant:self.expanded ? 300 : 20]]
+    [super updateConstraints];
+}
+						</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h4>Avoid Adding/Removing Constraints</h4>
+					<h2 style="color: green;">A Better Approach</h2>
 					<div class="stretch">
 						<h4>Modify constraint priorities</h4>
+						<div style="padding: 20px">
 						<pre><code class="objc" data-trim contenteditable>
+- (void) updateConstraints {
+    if(self.isExpanded){
+        self.heightConstraintCollapsed.priority = 1;
+        self.heightConstraintExpanded.priority = 999;
+    } else {
+        self.heightConstraintCollapsed.priority = 999;
+        self.heightConstraintExpanded.priority = 1;
+    }
+    [super updateConstraints];
+}
 						</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h4>Avoid Adding/Removing Constraints</h4>
+					<h2 style="color: green;">The Best Approach</h2>
+					<div class="stretch">
+						<h4>Modify constraint constants</h4>
+						<div style="padding: 20px">
+						<pre><code class="objc" data-trim contenteditable>
+- (void) updateConstraints {
+    self.heightConstraintCollapsed.constant = self.isExpanded ? 300 : 20;
+    [super updateConstraints];
+}
+						</code></pre>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>Only add constraints to self</h2>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example adding constraint to parent
+					</code></pre>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example adding constraint to self
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Only constrain child views</h2>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example constraining own size
+					</code></pre>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example constraining a child view
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Use Intrinsic Sizing</h2>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example of intrinsic content size, hugging and resistance
+					</code></pre>
+					<pre><code class="objc" data-trim contenteditable>
+					TODO: Add example of basing intrinsic size on children
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Use UIStackLayout (iOS 9+)</h2>
+					<div class="stretch">
+						<div>
+						<pre><code class="objc" data-trim contenteditable>
+[green.heightAnchor constraintEqualToConstant:100].active = true;
+[green.widthAnchor constraintEqualToConstant:100].active = true;
+[blue.heightAnchor constraintEqualToConstant:100].active = true;
+[blue.widthAnchor constraintEqualToConstant:100].active = true;
+    
+stack.axis = UILayoutConstraintAxisHorizontal;
+stack.distribution = UIStackViewDistributionEqualSpacing;
+stack.alignment = UIStackViewAlignmentCenter;
+    
+[stack addArrangedSubview:green];
+[stack addArrangedSubview:blue];
+						</code></pre>
+						</div>
+						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none;"/>
 					</div>
 				</section>
 
@@ -448,7 +547,8 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 				</section>
 
 				<section>
-					<h2>Placement is easy, sizing is hard</h2>
+					<h2>Placement is easy</h2>
+					<h2>Sizing is hard</h2>
 				</section>
 
 				<section>

@@ -6,9 +6,9 @@
 //  Copyright © 2016 Tom Elliott. All rights reserved.
 //
 
-#import "SwappingPriorities.h"
+#import "SwappingPrioritiesCrash.h"
 
-@interface SwappingPriorities ()
+@interface SwappingPrioritiesCrash ()
 
 @property NSLayoutConstraint *heightConstraintCollapsed;
 @property NSLayoutConstraint *heightConstraintExpanded;
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation SwappingPriorities
+@implementation SwappingPrioritiesCrash
 
 - (id) initWithFrame:(CGRect)frame {
     if(self = [super initWithFrame:frame]){
@@ -52,7 +52,6 @@
                                                                                       attribute:NSLayoutAttributeNotAnAttribute 
                                                                                      multiplier:1.0 
                                                                                        constant:20];
-    self.heightConstraintCollapsed.priority = 999;
     [self addConstraint:self.heightConstraintCollapsed];
     
     self.heightConstraintExpanded = [NSLayoutConstraint constraintWithItem:self.content
@@ -62,8 +61,6 @@
                                                                   attribute:NSLayoutAttributeNotAnAttribute
                                                                  multiplier:1.0
                                                                    constant:300];
-    self.heightConstraintExpanded.priority = 1;
-    [self addConstraint:self.heightConstraintExpanded];
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -72,13 +69,12 @@
 }
 
 - (void) updateConstraints {
-    [self removeConstraints:self.constraints];
     if(self.isExpanded){
-        self.heightConstraintCollapsed.priority = 1;
-        self.heightConstraintExpanded.priority = 999;
+        [self removeConstraint:self.heightConstraintCollapsed];
+        [self addConstraint:self.heightConstraintExpanded];
     } else {
-        self.heightConstraintCollapsed.priority = 999;
-        self.heightConstraintExpanded.priority = 1;
+        [self removeConstraint:self.heightConstraintExpanded];
+        [self addConstraint:self.heightConstraintCollapsed];
     }
     [super updateConstraints];
 }
