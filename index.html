@@ -166,7 +166,9 @@
 					<h2 style="color: red;">How to Break It</h2>
 					<div class="stretch">
 						<h4>Forget to set up your views for autolayout</h4>
+						<div style="padding: 100px">
 						<p>By default, all views are configured for autoresizing</p>
+						</div>
 					</div>
 				</section>
 
@@ -174,9 +176,12 @@
 					<h4>Unsatisfiable Constraints</h4>
 					<h2 style="color: green;">How Not to Break It</h2>
 					<div class="stretch">
+						<div style="padding: 100px">
+						<p>Turn off autoresizing</p>
 						<pre><code class="objc" data-trim contenteditable>
 subview.translatesAutoresizingMaskIntoConstraints = NO;
 						</code></pre>
+						</div>
 					</div>
 				</section>
 
