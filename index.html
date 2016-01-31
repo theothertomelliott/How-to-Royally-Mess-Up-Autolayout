@@ -129,7 +129,7 @@
 					</code></pre>
 				</section>
 
-				<section>
+				<section data-background="img/math-dark.png">
 					<h2>Solution of simultaneous equations</h2>
 				</section>
 
@@ -509,28 +509,61 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 
 				<section>
 					<h2>Only add constraints to self</h2>
+					<h3 style="color: red">What not to do</h3>
+					<div style="padding: 20px">
 					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example adding constraint to parent
+  [self.superview 
+      addConstraints:[NSLayoutConstraint 
+                         constraintsWithVisualFormat:@"H:|[self]|"
+                                                 options:0 
+                                                 metrics:nil
+                                                   views:@{@"self" : self}]];
 					</code></pre>
-					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example adding constraint to self
-					</code></pre>
+					<ul>
+					<li>Limits reuse</li>
+					<li>Harder to debug</li>
+					<li>Can result in crashes</li>
+					</ul>
+					</div>
 				</section>
 
 				<section>
 					<h2>Only constrain child views</h2>
+					<h3 style="color: red">What not to do</h3>
+					<div style="padding: 20px">
 					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example constraining own size
+[self
+     addConstraints:[NSLayoutConstraint
+                     constraintsWithVisualFormat:@"H:[super(==500)]"
+                     options:0
+                     metrics:nil
+                     views:@{@"super" : self.superView}]];
 					</code></pre>
 					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example constraining a child view
+[self
+     addConstraints:[NSLayoutConstraint
+                     constraintsWithVisualFormat:@"H:[self(==500)]"
+                     options:0
+                     metrics:nil
+                     views:@{@"self" : self}]];
 					</code></pre>
+					</div>
 				</section>
 
 				<section>
 					<h2>Use Intrinsic Sizing</h2>
 					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example of intrinsic content size, hugging and resistance
+[self setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh 
+                                      forAxis:UILayoutConstraintAxisHorizontal];
+                                      
+[self setContentHuggingPriority:UILayoutPriorityDefaultLow 
+                        forAxis:UILayoutConstraintAxisHorizontal];
+
+// ...
+
+- (CGSize) intrinsicContentSize {
+    return CGSizeMake(500,0);
+}
 					</code></pre>
 					<pre><code class="objc" data-trim contenteditable>
 					TODO: Add example of basing intrinsic size on children
