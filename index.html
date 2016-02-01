@@ -279,6 +279,7 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h2>Crashes</h2>
 					<ul>
 						<li class="fragment">Bad Visual Format Language strings</li>
+						<li class="fragment">Constraining to superview before adding</li>
 					</ul>
 				</section>
 
@@ -548,22 +549,27 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 				<section>
 					<h2>Use Intrinsic Sizing</h2>
 					<pre><code class="objc" data-trim contenteditable>
-[self setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh 
-                                      forAxis:UILayoutConstraintAxisHorizontal];
-                                      
-[self setContentHuggingPriority:UILayoutPriorityDefaultLow 
-                        forAxis:UILayoutConstraintAxisHorizontal];
-
-// ...
-
+// Specify width only
 - (CGSize) intrinsicContentSize {
-    return CGSizeMake(500,0);
+    return CGSizeMake(500,UIViewNoIntrinsicMetric);
 }
 					</code></pre>
 					<pre><code class="objc" data-trim contenteditable>
-					TODO: Add example of basing intrinsic size on children
+// Specify minimal size that satisfies constraints
+- (CGSize) intrinsicContentSize {
+    [self.offscreenCell.contentView 
+        systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+}
 					</code></pre>
-				</section>
+					<pre><code class="objc" data-trim contenteditable>
+// Prefer to be equal to or larger than intrinsic size
+[self setContentCompressionResistancePriority:UILayoutPriorityDefaultHigh
+                                      forAxis:UILayoutConstraintAxisHorizontal];
+// Don't worry about fitting content
+[self setContentHuggingPriority:UILayoutPriorityDefaultLow
+                        forAxis:UILayoutConstraintAxisHorizontal];
+					</code></pre>
+</section>
 
 				<section>
 					<h2>Use UIStackLayout (iOS 9+)</h2>
@@ -620,7 +626,7 @@ stack.alignment = UIStackViewAlignmentCenter;
 						Yext<br/>
 						<a href="http://www.yext.com/company/careers/">yext.com/company/careers</a> <br>
 					</p>
-					<p><small>"I brake for exceptions"</small></p>
+					<p><small>"I'm trying to remember why there's a backslash to my left, but it escapes me"</small></p>
 				</section>
 
 			</div>
