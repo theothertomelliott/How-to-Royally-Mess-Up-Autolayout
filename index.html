@@ -414,6 +414,44 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 				</section>
 
 				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: red;">How to Break It</h2>
+					<div class="stretch">
+						<h4>Constraining to a superview too early</h4>
+						<pre><code class="objc" data-trim contenteditable>
+- (id) init {
+// ...
+    [self
+      addConstraints:[NSLayoutConstraint 
+                         constraintsWithVisualFormat:@"H:|[self]|"
+                                                 options:0 
+                                                 metrics:nil
+                                                   views:@{@"self" : self}]];
+    				</code></pre>    
+    				<pre><code class="objc" data-trim contenteditable>
+- (id) init {
+// ...
+    [self.superView
+      addConstraints:[NSLayoutConstraint 
+                         constraintsWithVisualFormat:@"H:|[self]|"
+                                                 options:0 
+                                                 metrics:nil
+                                                   views:@{@"self" : self}]];
+    				</code></pre>    				
+    				</div>
+    			</section>
+
+    			<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<p>Only add constraints to self (or self.view)</p>
+						<p>Only constrain child views</p>
+						<img src="img/view-children.png" style="background:none; border:none; box-shadow:none;"/>
+    				</div>
+    			</section>
+
+				<section>
 					<h2>Additional Best Practices</h2>
 				</section>
 
@@ -504,49 +542,6 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 }
 						</code></pre>
 						</div>
-					</div>
-				</section>
-
-				<section>
-					<h2>Only add constraints to self</h2>
-					<h3 style="color: red">What not to do</h3>
-					<div style="padding: 20px">
-					<pre><code class="objc" data-trim contenteditable>
-  [self.superview 
-      addConstraints:[NSLayoutConstraint 
-                         constraintsWithVisualFormat:@"H:|[self]|"
-                                                 options:0 
-                                                 metrics:nil
-                                                   views:@{@"self" : self}]];
-					</code></pre>
-					<ul>
-					<li>Limits reuse</li>
-					<li>Harder to debug</li>
-					<li>Can result in crashes</li>
-					</ul>
-					</div>
-				</section>
-
-				<section>
-					<h2>Only constrain child views</h2>
-					<h3 style="color: red">What not to do</h3>
-					<div style="padding: 20px">
-					<pre><code class="objc" data-trim contenteditable>
-[self
-     addConstraints:[NSLayoutConstraint
-                     constraintsWithVisualFormat:@"H:[super(==500)]"
-                     options:0
-                     metrics:nil
-                     views:@{@"super" : self.superView}]];
-					</code></pre>
-					<pre><code class="objc" data-trim contenteditable>
-[self
-     addConstraints:[NSLayoutConstraint
-                     constraintsWithVisualFormat:@"H:[self(==500)]"
-                     options:0
-                     metrics:nil
-                     views:@{@"self" : self}]];
-					</code></pre>
 					</div>
 				</section>
 
