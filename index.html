@@ -61,16 +61,13 @@
 				</section>
 				-->
 
-				<section data-background="img/yext-company-pale.png">
-					<img src="img/yext-logo-transparent.png" style="background:none; border:none; box-shadow:none;"/>
-					<div class="stretch">
+				<section data-background="img/yext-company.png">
+					<img src="img/yext-logo.png" style="background:none; border:none; box-shadow:none;"/>
 						<div style="padding: 50px">
-						<h4 style="color: #333">#1 in Digital Location Management</h4>
-						<h4 style="color: #333">Forbes Most Promising Companies (2014 & 2015)</h4>
-						<h4 style="color: #333">Fortune's Best Places to Work (2014 & 2015).</h4>
-						<h4 style="color: #333; padding: 30px">Hiring full stack engineers</h4>
+						<h4>#1 in Digital Location Management</h4>
+						<h4>Forbes Most Promising Companies (2014 & 2015)</h4>
+						<h4>Fortune's Best Places to Work (2014 & 2015).</h4>
 						</div>
-					</div>
 				</section>
 
 				<section>
@@ -85,10 +82,10 @@
 				<section>
 					<h2>Requirements</h2>
 					<ul>
-					<li class="fragment">Embed into any UI</li>
-					<li class="fragment">Framework distribution (No storyboards or xib)</li>
-					<li class="fragment">No third-party libraries</li>
 					<li class="fragment">Support iOS 7 and 8</li>
+					<li class="fragment">No third-party libraries</li>
+					<li class="fragment">Embed into any UI</li>
+					<li class="fragment">Distribute as framework (No storyboards or xib)</li>
 					</ul>
 				</section>
 
@@ -165,7 +162,9 @@
 				<section>
 					<h2>Unsatisfiable Constraints</h2>
 					<p>Simplified</p>
-					<img class="fragment" src="img/donaldduck-rage.gif" style="background:none; border:none; box-shadow:none;"/>
+				</section>
+				<section>
+					<img class="stretch" src="img/donaldduck-rage.gif" style="background:none; border:none; box-shadow:none;"/>
 				</section>
 				
 				<section>
@@ -362,6 +361,32 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h2 style="color: green;">How Not to Break It</h2>
 					<div class="stretch">
 						<pre><code class="objc" data-trim contenteditable>
+@implementation PhoneRowView
+
+- (id) initWithLeft:(UIButton*)left middle:(UIButton*)middle right:(UIButton*)right {
+  if(self = [super init]){
+    [self addSubview:left]; [self addSubview:middle]; [self addSubview:right];
+    NSDictionary *views = NSDictionaryOfVariableBindings(left,middle,right);
+    
+    // OMITTED: Make our left, right and middle views full-height (V:|[view]|)
+
+    [self addConstraints: [NSLayoutConstraint
+      constraintsWithVisualFormat:@"H:|[left][middle(==left)][right(==left)]|"
+      options:0 metrics:nil views:views]];
+  }
+  return self;
+}
+
+@end
+					</code></pre>
+					</div>
+				</section>
+
+				<section>
+					<h4>Crashes</h4>
+					<h2 style="color: green;">How Not to Break It</h2>
+					<div class="stretch">
+						<pre><code class="objc" data-trim contenteditable>
 PhoneRowView *row1 = [[PhoneRowView alloc] initWithLeft:digits[7] 
                                                  middle:digits[8] 
                                                   right:digits[9]];
@@ -383,32 +408,6 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
                          constraintsWithVisualFormat:
                          @"V:|[row1][row2(==row1)][row3(==row1)][row4(==row1)]|" 
                          options:0 metrics:nil views:views]];
-					</code></pre>
-					</div>
-				</section>
-
-    			<section>
-					<h4>Crashes</h4>
-					<h2 style="color: green;">How Not to Break It</h2>
-					<div class="stretch">
-						<pre><code class="objc" data-trim contenteditable>
-@implementation PhoneRowView
-
-- (id) initWithLeft:(UIButton*)left middle:(UIButton*)middle right:(UIButton*)right {
-  if(self = [super init]){
-    [self addSubview:left]; [self addSubview:middle]; [self addSubview:right];
-    NSDictionary *views = NSDictionaryOfVariableBindings(left,middle,right);
-    
-    // OMITTED: Make our left, right and middle views full-height (V:|[view]|)
-
-    [self addConstraints: [NSLayoutConstraint
-      constraintsWithVisualFormat:@"H:|[left][middle(==left)][right(==left)]|"
-      options:0 metrics:nil views:views]];
-  }
-  return self;
-}
-
-@end
 					</code></pre>
 					<p>Four blocks of VFL at most</p>
 					</div>
@@ -445,10 +444,8 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
     			<section>
 					<h4>Crashes</h4>
 					<h2 style="color: green;">How Not to Break It</h2>
-					<div class="stretch">
-						<p>Only constrain child views</p>
-						<img src="img/view-children.png" style="background:none; border:none; box-shadow:none;"/>
-    				</div>
+					<p>Only add constraints to self. Only constrain child views</p>
+					<img class="stretch" src="img/view-children.png" style="background:none; border:none; box-shadow:none;"/>
     			</section>
 
 				<section>
@@ -457,9 +454,15 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 
 				<section>
 					<h2>Avoid Adding/Removing Constraints</h2>
-					<ul>
+					<ul class="fragment">
 						<li>Add constraints up-front in the init method</li>
+						<li>Modify constraints in <code class="objc">updateConstraints</code> method</li>
 						<li>Change properties rather than replacing constraints</li>
+					</ul>
+					<div class="fragment">
+						<p>Example: Resizing the height of a view</p>
+						<p>Two constraints: <code class="objc">heightConstraintCollapsed</code> and <code class="objc">heightConstraintExpanded</code></p>
+					</div>
 				</section>
 
 				<section>
@@ -593,29 +596,25 @@ stack.alignment = UIStackViewAlignmentCenter;
 				</section>
 
 				<section>
-					<h2>Conclusions</h2>
+					<h1>Conclusions</h1>
 				</section>
 
-				<section>
+				<section data-background="img/sizing.png">
 					<h2>Placement is easy</h2>
 					<h2>Sizing is hard</h2>
 				</section>
 
-				<section>
-					<h2>Be Flexible</h2>
-					<p>TODO: Add Yoga picture?</p>
-				</section>
-
-				<section>
+				<section data-background="img/simple.png">
 					<h2>Keep it Simple</h2>
 				</section>
 
-				<section>
-					<h2>Use UIStackLayout</h2>
+				<section data-background="img/flexible.png">
+					<h2>Be Flexible</h2>
 				</section>
 
 				<section style="text-align: left;">
 					<h1>Thank You</h1>
+					<p><small>"I'm trying to remember why there's a backslash to my left, but it escapes me"</small></p>
 					<p>
 						Tom Elliott<br/>
 						<a href="http://telliott.io">telliott.io</a> <br>
@@ -625,7 +624,6 @@ stack.alignment = UIStackViewAlignmentCenter;
 						Yext<br/>
 						<a href="http://www.yext.com/company/careers/">yext.com/company/careers</a> <br>
 					</p>
-					<p><small>"I'm trying to remember why there's a backslash to my left, but it escapes me"</small></p>
 				</section>
 
 			</div>
