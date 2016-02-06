@@ -90,9 +90,35 @@
 				</section>
 
 				<section>
+					<h2>Consequence</h2>
+					<ul>
+					<li class="fragment">Only use programmatic autolayout</li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>What is Auto Layout?</h1>
+				</section>
+
+				<section data-background="img/math-dark.png">
+					<h2>Solution of simultaneous equations</h2>
+				</section>
+
+				<section>
+					<h2>Constraints</h2>
+					<ul>
+						<li>Specify a relationship between the layout properties of two views</li>
+						<li>Properties: position or size</li>
+						<li>Comparison and may include a constant</li>
+						<li>Vertical solution does not affect horizontal solution</li>
+					</ul>
+				</section>
+
+
+				<section>
 					<h2>Programmatic Auto Layout</h2>
 					<p>
-					Constraints
+					Creating a Constraint
 					</p>
 
 					<pre><code class="objc" data-trim contenteditable>
@@ -111,7 +137,7 @@
 				<section>
 					<h2>Programmatic Autolayout</h2>
 					<p>
-					Visual Format Language
+					Creating multiple constraints - Visual Format Language
 					</p>
 
 					<pre><code class="objc" data-trim contenteditable>
@@ -126,10 +152,6 @@
 					</code></pre>
 				</section>
 
-				<section data-background="img/math-dark.png">
-					<h2>Solution of simultaneous equations</h2>
-				</section>
-
 				<section>
 					<h2>What Could Go Wrong?</h2>
 					<ol>
@@ -142,7 +164,7 @@
 				<section>
 					<h2>Unsatisfiable Constraints</h2>
 					<div style="background: #000000">
-					<pre>  Unable to simultaneously satisfy constraints.
+					<pre>Unable to simultaneously satisfy constraints.
     
   Probably at least one of the constraints in the following list is one you don't want. 
   Try this: 
@@ -286,7 +308,7 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h4>Crashes</h4>
 					<h2 style="color: red;">How to Break It</h2>
 					<div class="stretch">
-						<h4>Typos</h4>
+						<h4>Bad VFL - Typos</h4>
 						<img src="img/typo-keypad.png" style="background:none; border:none; box-shadow:none;"/>
 					</div>
 				</section>
@@ -469,7 +491,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h4>Avoid Adding/Removing Constraints</h4>
 					<h2 style="color: red;">Not ideal</h2>
 					<div class="stretch">
-						<pre><code class="objc" data-trim contenteditable>
+						<pre style="padding: 50px;"><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     if(self.isExpanded){
         [self removeConstraint:self.heightConstraintCollapsed];
@@ -488,7 +510,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h4>Avoid Adding/Removing Constraints</h4>
 					<h2 style="color: red;">Very Bad</h2>
 					<div class="stretch">
-						<pre><code class="objc" data-trim contenteditable>
+						<pre style="padding: 30px;"><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     [self removeConstraints:self.constraints];
     [self addConstraints:[NSLayoutConstraint 
@@ -515,7 +537,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h2 style="color: green;">A Better Approach</h2>
 					<div class="stretch">
 						<h4>Modify constraint priorities</h4>
-						<div style="padding: 20px">
+						<div style="padding: 30px">
 						<pre><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     if(self.isExpanded){
@@ -537,10 +559,10 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h2 style="color: green;">The Best Approach</h2>
 					<div class="stretch">
 						<h4>Modify constraint constants</h4>
-						<div style="padding: 20px">
+						<div style="padding: 50px">
 						<pre><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
-    self.heightConstraintCollapsed.constant = self.isExpanded ? 300 : 20;
+    self.heightConstraint.constant = self.isExpanded ? 300 : 20;
     [super updateConstraints];
 }
 						</code></pre>
@@ -559,7 +581,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<pre><code class="objc" data-trim contenteditable>
 // Specify minimal size that satisfies constraints
 - (CGSize) intrinsicContentSize {
-    [self.offscreenCell.contentView 
+    [self 
         systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 }
 					</code></pre>
