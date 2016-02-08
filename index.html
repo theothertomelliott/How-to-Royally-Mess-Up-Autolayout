@@ -43,7 +43,7 @@
 				<section>
 					<h2>Auto Layout</h2>
 					<h3>And How to Royally Mess It Up</h3>
-					<div style="padding: 30px">
+					<div style="padding-top: 30px">
 					<p>
 						Tom Elliott
 					</p>
@@ -63,7 +63,7 @@
 
 				<section data-background="img/yext-company.png">
 					<img src="img/yext-logo.png" style="background:none; border:none; box-shadow:none;"/>
-						<div style="padding: 50px">
+						<div style="padding-top: 50px">
 						<h4>#1 in Digital Location Management</h4>
 						<h4>Forbes Most Promising Companies (2014 & 2015)</h4>
 						<h4>Fortune's Best Places to Work (2014 & 2015).</h4>
@@ -194,7 +194,7 @@
 					<h2 style="color: red;">How to Break It</h2>
 					<h4>Forget to set up your views for autolayout</h4>
 					<div class="stretch">
-						<div style="padding: 100px">
+						<div style="padding-top: 100px">
 						<ul>
 						<li>Autoresizing: predecessor to Auto Layout</li>
 						<li>By default, all programmatically created views are configured for autoresizing compatibility</li>
@@ -208,7 +208,7 @@
 					<h2 style="color: green;">How Not to Break It</h2>
 					<h4>Turn off autoresizing support</h4>
 					<div class="stretch">
-						<div style="padding: 100px">
+						<div style="padding-top: 100px">
 						<pre><code class="objc" data-trim contenteditable>
 subview.translatesAutoresizingMaskIntoConstraints = NO;
 						</code></pre>
@@ -221,12 +221,12 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h2 style="color: red;">How to Break It</h2>
 					<div class="stretch">
 						<h4>Limit your view to a fixed size</h4>
-						<div style="padding: 20px;">
+						<div style="padding-top: 20px;">
 							<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100)][blue(==100)]|"
 							</code></pre>
 						</div>
-						<img src="img/sizing-a.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+						<img src="img/sizing-a.png" style="background:none; border:none; box-shadow:none; padding-top: 50px;"/>
 					</div>
 				</section>
 
@@ -235,12 +235,12 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h2 style="color: red;">How to Break It</h2>
 					<div class="stretch">
 						<h4>Limit your view to a minimum/maxiumum size</h4>
-						<div style="padding: 20px;">
+						<div style="padding-top: 20px;">
 						<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100)][blue(<=100)]|"
 						</code></pre>
 						</div>
-						<img src="img/sizing-b.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+						<img src="img/sizing-b.png" style="background:none; border:none; box-shadow:none; padding-top: 50px;"/>
 					</div>
 				</section>
 				<section>
@@ -248,12 +248,12 @@ subview.translatesAutoresizingMaskIntoConstraints = NO;
 					<h2 style="color: green;">How Not to Break It</h2>
 					<div class="stretch">
 						<h4>Use priorities</h4>
-						<div style="padding: 20px;">
+						<div style="padding-top: 20px;">
 						<pre><code class="objc" data-trim contenteditable>
   @"H:|[green(==100@999)]-(100@700)-[blue(==100@800)]|"
 						</code></pre>
 						</div>
-						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none; padding: 50px;"/>
+						<img src="img/sizing-e.png" style="background:none; border:none; box-shadow:none; padding-top: 50px;"/>
 					</div>
 				</section>
 
@@ -442,9 +442,9 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 				<section>
 					<h4>Crashes</h4>
 					<h2 style="color: red;">How to Break It</h2>
+					<h4>Constraining to a superview too early</h4>
 					<div class="stretch">
-						<h4>Constraining to a superview too early</h4>
-						<pre><code class="objc" data-trim contenteditable>
+						<pre style="padding-top: 80px;"><code class="objc" data-trim contenteditable>
 - (id) init {
 // ...
     [self
@@ -453,24 +453,14 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
                                                  options:0 
                                                  metrics:nil
                                                    views:@{@"self" : self}]];
-    				</code></pre>    
-    				<pre><code class="objc" data-trim contenteditable>
-- (id) init {
-// ...
-    [self.superView
-      addConstraints:[NSLayoutConstraint 
-                         constraintsWithVisualFormat:@"H:|[self]|"
-                                                 options:0 
-                                                 metrics:nil
-                                                   views:@{@"self" : self}]];
-    				</code></pre>    				
+    				</code></pre>   				
     				</div>
     			</section>
 
     			<section>
 					<h4>Crashes</h4>
 					<h2 style="color: green;">How Not to Break It</h2>
-					<p>Only add constraints to self. Only constrain child views</p>
+					<p>Only constrain subviews</p>
 					<img class="stretch" src="img/view-children.png" style="background:none; border:none; box-shadow:none;"/>
     			</section>
 
@@ -495,7 +485,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h4>Avoid Adding/Removing Constraints</h4>
 					<h2 style="color: red;">Not ideal</h2>
 					<div class="stretch">
-						<pre style="padding: 50px;"><code class="objc" data-trim contenteditable>
+						<pre style="padding-top: 50px;"><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     if(self.isExpanded){
         [self removeConstraint:self.heightConstraintCollapsed];
@@ -514,7 +504,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h4>Avoid Adding/Removing Constraints</h4>
 					<h2 style="color: red;">Very Bad</h2>
 					<div class="stretch">
-						<pre style="padding: 30px;"><code class="objc" data-trim contenteditable>
+						<pre style="padding-top: 30px;"><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     [self removeConstraints:self.constraints];
     [self addConstraints:[NSLayoutConstraint 
@@ -541,7 +531,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h2 style="color: green;">A Better Approach</h2>
 					<div class="stretch">
 						<h4>Modify constraint priorities</h4>
-						<div style="padding: 30px">
+						<div style="padding-top: 30px">
 						<pre><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     if(self.isExpanded){
@@ -563,7 +553,7 @@ NSDictionary *views = NSDictionaryOfVariableBindings(row1,row2,row3,row4);
 					<h2 style="color: green;">The Best Approach</h2>
 					<div class="stretch">
 						<h4>Modify constraint constants</h4>
-						<div style="padding: 50px">
+						<div style="padding-top: 50px">
 						<pre><code class="objc" data-trim contenteditable>
 - (void) updateConstraints {
     self.heightConstraint.constant = self.isExpanded ? 300 : 20;
